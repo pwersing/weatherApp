@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <script src="config.js" defer></script>
+    <script src="script.js" defer></script>
+</head>
+
+
+<body>
+    <div class="main">
+        <section>
+            <h2>Weather Application</h2>
+            <button id="change-theme">
+                <span class="fas fa-moon"></span>
+                <span class="fas fa-sun"></span>
+            </button>
+            <form class="weather-form">
+                <h1 class="weather-title">Current Weather</h1>
+                <input type="text" class="city-input" placeholder="Enter your ZIP code">
+                <button class="btn-primary" type="submit">Get Current Weather</button>
+                <button class="btn-cancel" type="reset">Reset</button>
+            </form>
+            <div class="weather-card">
+
+                <h1 class="city-name" id="cityName"></h1>
+                <p class="temperature" id="temp"></p>
+                <p class="humidity" id="humidity"></p>
+                <p class="weather-icon" id="weatherIcon"><span class=""></span></p>
+                <p class="weather-description" id="weatherDesc"></p>
+                <p class="timeStamp" id="weatherTimeStamp"></p>
+
+
+
+            </div>
+        </section>
+</body>
+
+</html>

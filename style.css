@@ -1,0 +1,316 @@
+**********************Note************************ Special thanks to youtuber Sajid for his helpful explaination of website styling and general web development tips. His video on using flex-box greatly increased my understanding on the topic Link: https: //www.youtube.com/@whosajid
+**************************************************/
+
+/* -------------------------
+   Basic Reset and Theme Colors
+---------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* For the colors, I used the following color generator: https://www.iamsajid.com/colors/ */
+:root {
+    --color-primary: hsl(255, 50%, 90%);
+    --color-secondary: hsl(255, 50%, 10%);
+    --color-tertiary: hsl(315, 80%, 20%);
+    --color-accent: hsl(195, 80%, 20%);
+
+    /* Glass effect variables */
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --shadow-light: 0 8px 32px rgba(0, 0, 0, 0.1);
+    --blur-strength: 20px;
+}
+
+.dark {
+    --color-primary: hsl(255, 50%, 10%);
+    --color-secondary: hsl(255, 50%, 90%);
+    --color-tertiary: hsl(315, 80%, 80%);
+    --color-accent: hsl(195, 80%, 80%);
+
+    /* Dark theme glass effects */
+    --glass-bg: rgba(0, 0, 0, 0.2);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+/* -------------------------
+   Global Font and Body Styles
+---------------------------- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    transition: all 0.3s ease;
+    color: var(--color-secondary);
+    overflow-x: hidden;
+    padding: 2rem;
+    position: relative;
+    padding-bottom: 80px;
+}
+
+/* Animated background overlay */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+
+
+/* ------------------------------------------
+   For Theme Change Button (Dark vs light)
+------------------------------------------ */
+#change-theme {
+    width: auto;
+    border-radius: 50%;
+    padding: 1rem;
+    background-color: var(--color-tertiary);
+    color: var(--color-primary);
+    border: solid;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#change-theme:hover {
+    transform: scale(1.1);
+}
+
+#change-theme span:last-child {
+    display: none;
+}
+
+.dark #change-theme span:first-child {
+    display: none;
+}
+
+.dark #change-theme span:last-child {
+    display: block;
+}
+
+/* -------------------------
+   Layout: Main Container and Sections
+---------------------------- */
+.main {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 0;
+    background: transparent;
+    position: relative;
+    z-index: 1;
+}
+
+section {
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-primary);
+    padding: 2rem;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--color-tertiary);
+    border-bottom: 2px solid var(--color-accent);
+    padding-bottom: 0.5rem;
+}
+
+/* -------------------------
+   Weather Styles
+---------------------------- */
+.weather-form {
+    padding: 1em;
+    margin-bottom: 2rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.weather-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--color-secondary);
+    opacity: 0.9;
+}
+
+.city-input {
+    width: 100%;
+    padding: 1rem;
+    color: var(--color-secondary);
+    background-color: var(--color-primary);
+    border: 1px solid var(--color-secondary);
+    border-radius: 4px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.city-input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 1rem;
+    background-color: var(--color-primary);
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
+    border-radius: 4px;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-accent);
+    color: var(--color-primary);
+    transform: translateY(-2px);
+}
+
+.btn-cancel {
+    display: inline-block;
+    padding: 1rem;
+    background-color: var(--color-tertiary);
+    color: var(--color-primary);
+    border: none;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.btn-cancel:hover {
+    opacity: 0.8;
+    transform: translateY(-2px);
+}
+
+.weather-card {
+    text-align: center;
+    padding: 2rem 0;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.city-name {
+    font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+    color: var(--color-secondary);
+}
+
+.temperature {
+    font-size: 3rem;
+    font-weight: 100;
+    margin: 1rem 0;
+    color: var(--color-accent);
+}
+
+.humidity {
+    font-size: 1.2rem;
+    color: var(--color-accent);
+    font-weight: 600;
+    margin: 1rem 0;
+}
+
+.weather-icon {
+    font-size: 3rem;
+    margin: 1rem 0;
+    color: var(--color-secondary);
+}
+
+.weather-description {
+    font-size: 1.1rem;
+    color: var(--color-secondary);
+    opacity: 0.8;
+    margin-bottom: 1rem;
+    text-transform: capitalize;
+}
+
+.timeStamp {
+    text-align: center;
+    font-size: 0.9rem;
+    opacity: 0.6;
+    margin-top: 1.5rem;
+    color: var(--color-secondary);
+    font-weight: normal;
+}
+
+/* Error display styling */
+.error-display {
+    color: #ff6b6b;
+    font-weight: bold;
+    text-align: center;
+    padding: 1rem;
+}
+
+/* -------------------------
+   Responsive Styles
+---------------------------- */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem;
+        padding-bottom: 0;
+    }
+
+    .main {
+        margin: 0;
+    }
+
+    section {
+        padding: 1.5rem;
+    }
+
+    section h2 {
+        font-size: 1.8rem;
+    }
+
+    .temperature {
+        font-size: 2.5rem;
+    }
+
+    .weather-icon {
+        font-size: 2.5rem;
+    }
+
+    .city-name {
+        font-size: 1.5rem;
+    }
+
+    .weather-card {
+        min-height: 250px;
+    }
+
+    #change-theme {
+        border-radius: 4px;
+        transform: none;
+    }
+}
